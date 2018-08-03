@@ -104,15 +104,59 @@ var _reactDom = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/i
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _session_api_util = __webpack_require__(/*! ./util/session_api_util */ "./frontend/util/session_api_util.js");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
+  window.signup = _session_api_util.signup;
+  window.login = _session_api_util.login;
+  window.logout = _session_api_util.logout;
+
   _reactDom2.default.render(_react2.default.createElement(
     'h1',
     null,
     'Welcome to BenchBnB'
   ), document.getElementById('root'));
 });
+
+/***/ }),
+
+/***/ "./frontend/util/session_api_util.js":
+/*!*******************************************!*\
+  !*** ./frontend/util/session_api_util.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var signup = exports.signup = function signup(user) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/user',
+    data: { user: user }
+  });
+};
+
+var login = exports.login = function login(user) {
+  return $.ajax({
+    method: 'POST',
+    url: '/api/session',
+    data: { user: user }
+  });
+};
+
+var logout = exports.logout = function logout(current_user) {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/api/session/'
+  });
+};
 
 /***/ }),
 
